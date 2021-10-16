@@ -2,7 +2,10 @@ from . import db, ma
 
 
 class PsychologyTestResult(db.Model):
+    __tablename__ = 'psychology_test_result'
+
     id = db.Column(db.Integer, primary_key=True)
+
     question_id = db.Column(db.Integer)
     result = db.Column(db.Integer)
 
