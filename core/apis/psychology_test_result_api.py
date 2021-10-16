@@ -1,5 +1,3 @@
-import datetime
-
 from flask import request, Blueprint
 from core.apis.user_api import user_api
 from core.models.user_model import *
