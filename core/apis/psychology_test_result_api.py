@@ -39,5 +39,3 @@ def get_user_test_results(user_id):
     res = psychology_test_results_schema.dumps(test_results)
 
     return res
-
-

@@ -11,6 +11,8 @@ class User(db.Model):
     sign_up_date = db.Column(db.DateTime)
     signature = db.Column(db.Text)  # binary string
     password = db.Column(db.String(100))
+    treatment = db.Column(db.Integer)
+    rationality = db.Column(db.Boolean)
 
     psychology_test_result = db.relationship('PsychologyTestResult', backref='user', lazy=True)
     records = db.relationship('Record', backref='user', lazy=True)
@@ -21,7 +23,7 @@ class User(db.Model):
 
 class UserSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'email', 'sign_up_date')
+        fields = ('id', 'name', 'email', 'sign_up_date', 'treatment', 'rationality')
 
 
 user_schema = UserSchema()
