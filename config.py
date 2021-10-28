@@ -1,4 +1,4 @@
-from os import environ, path
+from os import path
 from dotenv import load_dotenv
 
 basedir = path.abspath(path.dirname(__file__))
@@ -11,3 +11,7 @@ class Config:
 
     SQLALCHEMY_DATABASE_URI = f'sqlite:///{db_path}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    CORS_SUPPORTS_CREDENTIALS = True
+
+    SECRET_KEY = 'delegate'

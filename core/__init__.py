@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 
 
 def create_app():
@@ -26,4 +27,5 @@ def create_app():
         def hello():
             return 'Hello, this is the delegate back-end!'
 
+    CORS(app, resources={r"/*": {"origins": "*"}})
     return app

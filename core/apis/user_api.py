@@ -1,7 +1,10 @@
 import datetime
+import numpy as np
 
-from flask import request, Blueprint
+from werkzeug.security import generate_password_hash
+from flask import request, Blueprint, jsonify
 from core.models.user_model import *
+from core.apis.wrapper import token_required
 
 user_api = Blueprint('user', __name__, url_prefix='/user')
 
@@ -28,12 +31,16 @@ def create_user():
     email = request.json['email']
     signature = request.json['signature']
     password = request.json['password']
-    treatment = request.json['treatment']
-    rationality = request.json['rationality']
+    treatment = np.random.randint(0, 2)
+    rationality = False
     sign_up_date = datetime.datetime.now()
 
+    duplication_check = User.query.filter_by(email=email).first()
+    if duplication_check is not None:
+        return jsonify(message="email is duplicated"), 409
+
     user = User(name=name, email=email, sign_up_date=sign_up_date,
-                signature=signature, password=password,
+                signature=signature, password=generate_password_hash(password, method='sha256'),
                 treatment=treatment, rationality=rationality)
 
     db.session.add(user)
@@ -58,3 +65,9 @@ def update_user(user_id):
     res = user_schema.jsonify(user)
 
     return res
+
+
+@user_api.route('current', methods=['GET'])
+@token_required
+def get_current_user(current_user):
+    return user_schema.jsonify(current_user)
