@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
 from core.models.user_model import User
 from datetime import datetime, timedelta
+from core.apis.wrapper import token_required
 
 import jwt
 
@@ -25,3 +26,9 @@ def login():
     )
 
     return jsonify({'token': token})
+
+
+@auth_api.route('/verify', methods=['GET'])
+@token_required
+def verify_token(user):
+    return jsonify(True)
