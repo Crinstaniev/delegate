@@ -10,7 +10,9 @@ class Record(db.Model):
     cash = db.Column(db.Float)
     eth_holding = db.Column(db.Float)
     vta = db.Column(db.Float)
-    roi = db.Column(db.Float)
+    roi_1 = db.Column(db.Float)
+    roi_2 = db.Column(db.Float)
+    roi_3 = db.Column(db.Float)
     decision_phase = db.Column(db.Integer)
     decision_maker = db.Column(db.Integer)
 
@@ -23,7 +25,7 @@ class Record(db.Model):
 class RecordSchema(ma.Schema):
     class Meta:
         fields = ('id', 'time', 'cash',
-                  'eth_holding', 'vta', 'roi',
+                  'eth_holding', 'vta', 'roi_1', 'roi_2', 'roi_3',
                   'decision_phase', 'decision_maker',
                   'user_id')
 

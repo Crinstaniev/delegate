@@ -16,7 +16,7 @@ class User(db.Model):
     rationality = db.Column(db.Boolean)
 
     psychology_test_result = db.relationship('PsychologyTestResult', backref='user', lazy=True)
-    records = db.relationship('Record', backref='user', lazy=True)
+    records = db.relationship('Record', backref='user', order_by='Record.id.desc()')
 
     @classmethod
     def authenticate(cls, email, password):
